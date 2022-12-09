@@ -1,0 +1,152 @@
+---
+title: "Data Science:<br>Background and Vision"
+subtitle: "Berkeley Assistant Teaching Professor Interview<br>December 7, 2022"
+author: "Jeff Jacobs<br><a href='mailto:jjacobs3@cs.stanford.edu'>jjacobs3@cs.stanford.edu</a>"
+format:
+  revealjs:
+    transition: slide
+    margin-top: "10px"
+    margin-bottom: "0px"
+    margin-left: "0px"
+    margin-right: "0px"
+    auto-stretch: true
+editor: visual
+---
+
+```{css, include=FALSE}
+aside > * {
+  font-size: 0.5em !important;
+}
+```
+
+## My Background
+
+```{r, out.height="600px"}
+library(tidyverse)
+ta <- tribble(
+  ~inst, ~coursecode, ~coursename, ~session, ~stats, ~cs, ~socialsci,
+  'Stanford', 'CS103', '\nMathematical\nFoundations\nof Computing', 'Autumn 2012, 2013, Winter 2013', 46, 46, 9,
+  'Stanford', 'CS109', '\nProbability and Statistics\nfor Computer Scientists', 'Winter 2014, Spring 2014', 74, 13, 13,
+  'Stanford', 'CS221', '\nArtificial Intelligence\n Principles and Techniques', 'Summer 2013', 12, 86, 12,
+#  'Columbia', 'POLS4700   ', '\n  Mathematical\nMethods for\n      Political Science', 'Fall 2018', 45, 10, 45,
+  'Columbia', 'POLS4700   ', '\nMathematical Methods\nfor Political Science', 'Fall 2018', 45, 10, 45,
+  'Columbia', 'POLS4710 ', '\nQuantitative Political\nResearch', 'Fall 2017', 12, 12, 86,
+  'NYU', 'DSUA111', '\nData Science\nfor Everyone', 'Spring, Summer-I, Summer-II, Fall 2020', 50, 50, 50,
+  'Columbia', 'QMSS5067', '\nNatural Language Processing\nfor the Social Sciences', 'Summer 2021', 10, 45, 45
+)
+library(plotly)
+# axis layout
+axis <- function(title) {
+  list(
+    title = title,
+    ticks="",
+    titlefont = list(
+      size = 20
+    ),
+    #tickfont = list(
+    #  size = 0
+    #),
+    #tickcolor = 'white',
+    #ticklen = 0,
+    showgrid = FALSE,
+    showticklabels=FALSE
+  )
+}
+fig <- ta %>% plot_ly()
+fig <- fig %>% add_trace(
+    type = 'scatterternary',
+    mode = 'markers+text',
+    a = ~stats,
+    b = ~cs,
+    c = ~socialsci,
+    text = ~coursecode,
+    textposition = "top",
+    textfont = list(size=14),
+    marker = list( 
+      symbol = 'circle',
+      #color = '#DB7365',
+      color = '#F0E442',
+      size = 10,
+      line = list('width' = 1)
+    ),
+    hoverinfo = "text",
+    hovertext = paste0(ta$inst, ": ", ta$session)
+)
+fig <- fig %>% add_trace(
+    type = 'scatterternary',
+    mode = 'markers+text',
+    a = 50,
+    b = 52,
+    c = 52,
+    #text = "TEST",
+    marker = list( 
+      symbol = 100,
+      #color = '#DB7365',
+      color = 'rgb(17, 157, 255)',
+      size = 100,
+      line = list('width' = 2),
+      pos = 2,
+      opacity = 0.5
+    ),
+    showlegend=FALSE,
+    hoverinfo = "none"
+)
+fig <- fig %>% add_trace(
+  type = 'scatterternary',
+  mode = 'text',
+  a = ~stats,
+  b = ~cs,
+  c = ~socialsci,
+  #marker = list(
+  #  size=12,
+  #  color='white'
+  #),
+  text = ~coursename,
+  textposition = "bottom",
+  textfont = list(size=12),
+  showlegend = FALSE
+)
+fig <- fig %>% layout(
+    #title = "Background",
+    ternary = list(
+      sum = 100,
+      aaxis = axis('Statistics'),
+      baxis = axis('Computer Science'),
+      caxis = axis('Social Science')
+    ),
+    margin = list(t=50)
+  )
+fig
+```
+
+## My Commitment to Excellence
+
+### in Diversity, Equity, Inclusion and Belonging
+
+![](img/ctc.png){fig-align="center" width="612" margin-bottom="0"}
+
+![](img/c4p_header.jpg){width="1573"}
+
+## My Vision {.smallaside}
+
+::: columns
+::: {.column width="50%"}
+Tailoring to the macro: Where are students coming from? Where are they going?
+
+![](img/pathways_1.png){width="550"}
+
+::: {style="font-size: 0.5em;"}
+([Gruver et al. (2019), "Using Latent Variable Models to Observe Academic Pathways"](https://arxiv.org/abs/1905.13383))
+:::
+:::
+
+::: {.column width="50%"}
+Tailoring to the micro: Where are students getting stuck? Where are they getting bored?
+
+<img src="img/state_table.png" width="550px" height="263px" style="padding-top:18px;"/>
+
+::: {style="font-size:0.5em;"}
+([Blikstein et al. (2019), "Using Learning Analytics to Detect Patterns in the Learning of Computer Programming"](https://www.tandfonline.com/doi/abs/10.1080/10508406.2014.954750))
+:::
+:::
+:::
